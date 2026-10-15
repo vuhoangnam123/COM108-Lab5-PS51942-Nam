@@ -1,38 +1,46 @@
 #include <stdio.h>
 
 // --- INTERFACE BẮT BUỘC - KHÔNG ĐỔI CHỮ KÝ HÀM ---
-int phanPhoiATM(int soTien, int *to500, int *to200, int *to100, int *to50);
+float nhapSanLuongWh();
+float doiWhSangKwh(float wh);
+float tinhTienDien(float kwh, float donGia);
 
 #ifndef UNIT_TEST
 int main() {
-    int soTien;
-    int to500 = 0, to200 = 0, to100 = 0, to50 = 0;
+  float wh = nhapSanLuongWh();
+  float kwh = doiWhSangKwh(wh);
+  float donGia = 3000.0; // Đơn giá ví dụ: 3000 VNĐ/kWh
+  float tongTien = tinhTienDien(kwh, donGia);
 
-    printf("Nhap so tien can rut (Boi so 50.000): ");
-    scanf("%d", &soTien);
+  printf("\n--- HOA DON SAC XE ---");
+  printf("\nSan luong: %.2f Wh", wh);
+  printf("\nSan luong quy doi: %.2f kWh", kwh);
+  printf("\nTong tien: %.2f VND\n", tongTien);
 
-    if (soTien <= 0 || soTien % 50000 != 0) {
-        printf("So tien khong hop le! He thong tu choi giao dich.\n");
-        return 0;
-    }
-
-    int tongTo = phanPhoiATM(soTien, &to500, &to200, &to100, &to50);
-
-    printf("\n--- KET QUA RUT TIEN ---");
-    printf("\nTo 500k: %d", to500);
-    printf("\nTo 200k: %d", to200);
-    printf("\nTo 100k: %d", to100);
-    printf("\nTo  50k: %d", to50);
-    printf("\nTong so to tien nhan: %d to\n", tongTo);
-
-    return 0;
+  return 0;
 }
 #endif
 
-// --- SINH VIÊN VIẾT CODE CỦA HÀM DƯỚI ĐÂY ---
-int phanPhoiATM(int soTien, int *to500, int *to200, int *to100, int *to50) {
-    // TODO: Viết code phân phối số tờ tiền và trả về tổng số tờ
-    // Yeu cau: Tuyet doi khong dung lenh in ra man hinh ben trong ham nay
-    
-    return 0;
+// --- SINH VIÊN VIẾT CODE CÁC HÀM DƯỚI ĐÂY ---
+float nhapSanLuongWh() {
+  // TODO: Viết code nhập sản lượng sử dụng vòng lặp do...while (yêu cầu > 0)
+ //thêm tại đây
+ float wh = 0.0;
+do{
+    printf("Nhap so Wh: ");
+    scanf("%f", &wh);
+}while (wh <= 0);
+  
+  return wh;
+}
+
+float doiWhSangKwh(float wh) {
+  // TODO: Viết code quy đổi (lưu ý tránh lỗi chia số nguyên)
+   return wh/1000.0;
+}
+
+float tinhTienDien(float Kwh, float donGia) {
+  // TODO: Tính tiền
+  float tongTien = Kwh * donGia;
+  return tongTien;
 }
